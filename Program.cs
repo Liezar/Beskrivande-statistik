@@ -5,6 +5,7 @@ namespace Beskrivande_statistik
     {
         static void Main(string[] args)
         {
+            Statistics.Mode();
         }
     }
 }
