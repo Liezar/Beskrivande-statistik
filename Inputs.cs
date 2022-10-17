@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Beskrivande_statistik
 {
-    internal class Inputs
+    public static class Inputs
     {
         public static void CheckInputs(int[] source)
         {
