@@ -9,7 +9,7 @@ namespace Beskrivande_statistik
 {
     internal class Inputs
     {
-        public static void checkInputs(int[] source)
+        public static void CheckInputs(int[] source)
         {
             if (source == null)
             {
@@ -20,11 +20,12 @@ namespace Beskrivande_statistik
                 throw new InvalidOperationException("Contains no elements");
             }
         }
-        public static int[] importJSON()
+        public static int[] ImportJSON()
         {
-            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/JSON.json");
-            int[] import = JsonConvert.DeserializeObject<int[]>(filePath);
-            checkInputs(import);
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/data.json");
+            string jsonString = File.ReadAllText(filePath);
+            int[] import = JsonConvert.DeserializeObject<int[]>(jsonString);
+            CheckInputs(import);
             return import;
         }
     }
