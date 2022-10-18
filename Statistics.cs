@@ -66,8 +66,17 @@ namespace Beskrivande_statistik
             double meanResault = Statistics.Mean(Inputs.ImportJSON());
 
             dynamic allData = new Dictionary<string, object>() { };
-           
+
+            StringBuilder modeResault = new StringBuilder();
+            foreach (var item in Mode())
+            {
+                modeResault.Append($"{item} ");
+            }
+
             allData.Add("Mean", meanResault);
+            allData.Add("Mode", modeResault);
+            allData.Add("StandardDeviation", GetStandardDeviation());
+            allData.Add("Median", GetMedian());
 
             return allData;
         }
