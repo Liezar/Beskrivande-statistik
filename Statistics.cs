@@ -13,19 +13,31 @@ namespace Beskrivande_statistik
 {
     public static class Statistics
     {
+        //En metod för att ta de mest förekommande talen i json-filen och returnera det till en int[]
         public static int[] Mode()
         {
+            //Hämtar datan från json-filen och lagrar i variablen
             var jsonNumbers = Inputs.ImportJSON();
+
+            //En list som lagrar typvärden
             List<int> KeyList = new List<int>();
-            
+
+            //Kollar alla tal och räknar hur många gånger talen förekommer
             var counts = jsonNumbers.GroupBy(i => i).Select(grp => new { grp.Key, Count = grp.Count() });
+
+            //Lägger till alla tal som förkommer flest gånger i itemsMax
             var itemsMax = counts.Where(x => x.Count == counts.Max(y => y.Count));
 
+            //Sorterar i vilken ordning som items läggs till i Keylist
             foreach (var item in itemsMax.OrderBy(x => x.Key))
             {
                 KeyList.Add(item.Key);
             }
+
+            //Konverterar listan till en array och returnerar detta
             return KeyList.ToArray();
+        }
+
         }     
         //metod för beräkning av standardavikelse
         public static double GetStandardDeviation()
