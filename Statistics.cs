@@ -1,4 +1,13 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.Runtime;
+using System.Xml.Serialization;
 
 namespace Beskrivande_statistik
 {
@@ -40,6 +49,15 @@ namespace Beskrivande_statistik
             double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length), 1);
 
             return standardDeviation;
+           //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
+           int[] nums = Inputs.ImportJSON();
+           //hittar medelvärde
+           double deviation = nums.Average();
+           //formel för standardavikelse, avrundar resultat till en decimal
+           double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
+           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
+           
+           return standardDeviation;
         }
 
         public static int GetMedian()
@@ -53,7 +71,6 @@ namespace Beskrivande_statistik
             {
                 // jämt antal
                 return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
-                
             }
             else
             {
@@ -109,6 +126,58 @@ namespace Beskrivande_statistik
                 sum += x;
             }
             double rounded = Math.Round(sum / inData.Length, 1);
+            return rounded;
+                return sortednums[itemIndex];  
+            }    
+        }
+    
+        public static int GetMaximum()
+        {
+            int[] inData = Inputs.ImportJSON();
+            return inData.Max();
+        }
+
+        public static int GetMinimum()
+        {
+            int[] inData = Inputs.ImportJSON();
+            return inData.Min();
+        }
+
+        public static int GetRange()
+        {
+            int range = GetMaximum() - GetMinimum();
+            return range;
+        }
+        public static dynamic DescriptiveStatistics()
+        {
+            dynamic allData = new Dictionary<string, object>() { };
+
+            StringBuilder modeResault = new StringBuilder();
+            foreach (var item in Mode())
+            {
+                modeResault.Append($"{item}, ");
+            }
+
+            allData.Add("Maximum", GetMaximum());
+            allData.Add("Minimum", GetMinimum());
+            allData.Add("Medelvärde", GetMean());
+            allData.Add("Median", GetMedian());
+            allData.Add("Typvärde", modeResault);
+            allData.Add("Variationsbredd", GetRange());
+            allData.Add("Standardavvikelse", GetStandardDeviation());
+
+            return allData;
+        }
+
+        public static double GetMean()
+        {
+            var inData = Inputs.ImportJSON();
+            double sum = 0;
+            foreach (int x in inData)
+            {
+                sum += x;
+            }
+            double rounded = Math.Round(sum / inData.Length,1);
             return rounded;
         }
     }

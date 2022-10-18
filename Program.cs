@@ -1,15 +1,14 @@
 ﻿using Newtonsoft.Json;
+using System.Linq;
 namespace Beskrivande_statistik
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Statistics.GetMedian());
-            Console.WriteLine(Statistics.GetStandardDeviation());
-            foreach (var item in Statistics.Mode())
+            foreach (KeyValuePair<string, object> kvp in Statistics.DescriptiveStatistics())
             {
-                Console.Write($"{item} ");
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
             }
         }
     }
