@@ -5,10 +5,10 @@ namespace Beskrivande_statistik
     {
         static void Main(string[] args)
         {
-            double meanResault = Statistics.Mean(Inputs.ImportJSON());
-
-            
-            Console.WriteLine(Statistics.DescriptiveStatistics());
+            foreach (KeyValuePair<string, object> kvp in Statistics.DescriptiveStatistics())
+            {
+                Console.WriteLine($"{kvp.Key} = {kvp.Value}");
+            }
         }
     }
 }

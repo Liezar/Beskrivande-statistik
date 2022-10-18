@@ -12,19 +12,13 @@ namespace Beskrivande_statistik
         {
             double meanResault = Statistics.Mean(Inputs.ImportJSON());
 
-            dynamic allData = new Dictionary<string, object>()
-            {
-                
-            };
+            dynamic allData = new Dictionary<string, object>() { };
+           
             allData.Add("Mean", meanResault);
-
-            foreach (KeyValuePair<string, object> kvp in allData)
-            {
-                Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value}");
-            }
 
             return allData;
         }
+
         public static double Mean(int[] inData)
         {
             double sum = 0;
