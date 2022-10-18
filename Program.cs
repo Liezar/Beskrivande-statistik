@@ -8,13 +8,8 @@ namespace Beskrivande_statistik
         {
             foreach (KeyValuePair<string, object> kvp in Statistics.DescriptiveStatistics())
             {
-                Console.WriteLine($"{kvp.Key} = {kvp.Value}");
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
             }
-
-            Console.WriteLine(Statistics.GetMaximum());
-            Console.WriteLine(Statistics.GetMinimum());
-            Console.WriteLine(Statistics.GetRange());
-
         }
     }
 }
