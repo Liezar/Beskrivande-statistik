@@ -24,9 +24,8 @@ namespace Beskrivande_statistik
                 KeyList.Add(item.Key);
             }
             return KeyList.ToArray();
-        }
+        }     
 
-        
         public static double GetStandardDeviation()
         {
            //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
