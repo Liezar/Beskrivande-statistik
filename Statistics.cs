@@ -40,15 +40,15 @@ namespace Beskrivande_statistik
 
         public static double GetStandardDeviation()
         {
-           //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
-           int[] nums = Inputs.ImportJSON();
-           //hittar medelvärde
-           double deviation = nums.Average();
-           //formel för standardavikelse, avrundar resultat till en decimal
-           double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
-           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
-           
-           return standardDeviation;
+            //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
+            int[] nums = Inputs.ImportJSON();
+            //hittar medelvärde
+            double deviation = nums.Average();
+            //formel för standardavikelse, avrundar resultat till en decimal
+            double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
+            double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length), 1);
+
+            return standardDeviation;
         }
 
         public static int GetMedian()
@@ -66,17 +66,10 @@ namespace Beskrivande_statistik
             else
             {
                 // ojämnt antal
-                return sortednums[itemIndex];  
-            }    
-        }
-    
-        public static int GetMaximum()
                 return sortednums[itemIndex];
-                
             }
-                
         }
-    
+
         public static int GetMaximum()  //Metod för att hämta maxvärdet i en
                                         //array som innehåller datan från json-filen
         {
@@ -126,7 +119,7 @@ namespace Beskrivande_statistik
             {
                 sum += x;
             }
-            double rounded = Math.Round(sum / inData.Length,1);
+            double rounded = Math.Round(sum / inData.Length, 1);
             return rounded;
         }
     }
