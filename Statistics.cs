@@ -19,7 +19,7 @@ namespace Beskrivande_statistik
             var counts = jsonNumbers.GroupBy(i => i).Select(grp => new { grp.Key, Count = grp.Count() });
             var itemsMax = counts.Where(x => x.Count == counts.Max(y => y.Count));
 
-            foreach (var item in itemsMax)
+            foreach (var item in itemsMax.OrderBy(x => x.Key))
             {
                 KeyList.Add(item.Key);
             }
