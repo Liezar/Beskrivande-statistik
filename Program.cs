@@ -6,17 +6,10 @@ namespace Beskrivande_statistik
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Statistics.GetMedian());
-            Console.WriteLine(Statistics.GetStandardDeviation());
-            foreach (var item in Statistics.Mode())
+            foreach (KeyValuePair<string, object> kvp in Statistics.DescriptiveStatistics())
             {
-                Console.Write($"{item} ");
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
             }
-
-            Console.WriteLine(Statistics.GetMaximum());
-            Console.WriteLine(Statistics.GetMinimum());
-            Console.WriteLine(Statistics.GetRange());
-
         }
     }
 }
