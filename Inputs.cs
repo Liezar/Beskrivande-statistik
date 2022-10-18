@@ -4,7 +4,7 @@ namespace Beskrivande_statistik
 {
     public static class Inputs
     {
-        public static void CheckInputs(int[] source)
+        public static void CheckInputs(int[] source)  //En metod som kastar undantag om datakällan har nullvärde eller är tom
         {
             if (source == null)
             {
@@ -15,7 +15,7 @@ namespace Beskrivande_statistik
                 throw new InvalidOperationException("Contains no elements");
             }
         }
-        public static int[] ImportJSON()
+        public static int[] ImportJSON() //En metod som importerar och datan från json-filen och spar den i en array som vi jobbar med i programmet
         {
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/data.json");
             string jsonString = File.ReadAllText(filePath);
