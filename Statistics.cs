@@ -63,7 +63,7 @@ namespace Beskrivande_statistik
             }
                 
         }
-    }
+    
         public static int GetMaximum()
         {
 
