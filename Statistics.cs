@@ -41,15 +41,6 @@ namespace Beskrivande_statistik
            double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
            //returnar värdet på standardavikelsen
            return standardDeviation;
-            //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
-            int[] nums = Inputs.ImportJSON();
-            //hittar medelvärde
-            double deviation = nums.Average();
-            //formel för standardavikelse, avrundar resultat till en decimal
-            double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
-            double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length), 1);
-
-            return standardDeviation;
         }
         //metod för beräkning av medianvärde
         public static int GetMedian()
