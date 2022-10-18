@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Runtime;
-using System.Xml.Serialization;
+﻿using System.Text;
 
 namespace Beskrivande_statistik
 {
@@ -23,6 +14,7 @@ namespace Beskrivande_statistik
             List<int> KeyList = new List<int>();
 
             //Kollar alla tal och räknar hur många gånger talen förekommer
+
             var counts = jsonNumbers.GroupBy(i => i).Select(grp => new { grp.Key, Count = grp.Count() });
 
             //Lägger till alla tal som förkommer flest gånger i itemsMax
@@ -37,37 +29,38 @@ namespace Beskrivande_statistik
             //Konverterar listan till en array och returnerar detta
             return KeyList.ToArray();
         }
-
+ 
+        //metod för beräkning av standardavikelse
         public static double GetStandardDeviation()
         {
-            //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
-            int[] nums = Inputs.ImportJSON();
-            //hittar medelvärde
-            double deviation = nums.Average();
-            //formel för standardavikelse, avrundar resultat till en decimal
-            double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
-            double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length), 1);
-
-            return standardDeviation;
+           
+           int[] nums = Inputs.ImportJSON();
+           //formel för standardavikelse
+           double deviation = nums.Average();
+           double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
+           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
+           //returnar värdet på standardavikelsen
+           return standardDeviation;
         }
-
+        //metod för beräkning av medianvärde
         public static int GetMedian()
         {
-            //https://learn.microsoft.com/sv-se/dotnet/csharp/programming-guide/concepts/linq/how-to-add-custom-methods-for-linq-queries
-            int[] nums = Inputs.ImportJSON();
-            var sortednums = nums.OrderBy(number => number).ToList();
-            int itemIndex = sortednums.Count / 2;
-
-            if (sortednums.Count % 2 == 0)
-            {
-                // jämt antal
-                return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
-            }
-            else
-            {
-                // ojämnt antal
-                return sortednums[itemIndex];
-            }
+           //importerar Jsonfilen och konverterar till array 
+           int[] nums = Inputs.ImportJSON();
+           //Konverterar array till en lista och använder ToList för att sortera i storleksordning
+           var sortednums = nums.OrderBy(number => number).ToList();
+           //hittar talet i mitten på talserien:
+           int itemIndex = sortednums.Count / 2;
+           //om jämnt värde i mitten på talserien:
+           if (sortednums.Count % 2 == 0)
+           {
+               return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
+           }
+           //om ojämnt värde i mitten på talsträngen
+           else
+           {
+               return sortednums[itemIndex];  
+           }    
         }
 
         public static int GetMaximum()  //Metod för att hämta maxvärdet i en
@@ -90,7 +83,18 @@ namespace Beskrivande_statistik
             int range = GetMaximum() - GetMinimum();
             return range;
         }
-        public static dynamic DescriptiveStatistics()
+        public static double GetMean() // Metoden beräknar medelvärdet av datan från Json-filen.
+        {
+            int[] inData = Inputs.ImportJSON();
+            double sum = 0;
+            foreach (int x in inData)
+            {
+                sum += x;
+            }
+            double rounded = Math.Round(sum / inData.Length, 1);
+            return rounded;
+        }
+        public static dynamic DescriptiveStatistics() // Metoden anropar returvärdet från uträkningsmetoderna och skapar en Dictionary som returneras.
         {
             dynamic allData = new Dictionary<string, object>() { };
 
@@ -109,18 +113,6 @@ namespace Beskrivande_statistik
             allData.Add("Standardavvikelse", GetStandardDeviation());
 
             return allData;
-        }
-
-        public static double GetMean()
-        {
-            var inData = Inputs.ImportJSON();
-            double sum = 0;
-            foreach (int x in inData)
-            {
-                sum += x;
-            }
-            double rounded = Math.Round(sum / inData.Length, 1);
-            return rounded;
         }
     }
 }
