@@ -10,10 +10,10 @@ namespace Beskrivande_statistik
 {
     public static class Statistics
     {
-        
+        //Metod för beräkning av standardavikelse
         public static double GetStandardDeviation()
         {
-           //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
+           
            int[] nums = Inputs.ImportJSON();
            //hittar medelvärde
            double deviation = nums.Average();
@@ -24,10 +24,10 @@ namespace Beskrivande_statistik
            
            return standardDeviation;
         }
-
+        //Metod för beräkning av medianvärde
         public static int GetMedian()
         {
-            //https://learn.microsoft.com/sv-se/dotnet/csharp/programming-guide/concepts/linq/how-to-add-custom-methods-for-linq-queries
+            
             int[] nums = Inputs.ImportJSON();
             var sortednums = nums.OrderBy(number => number).ToList();
             int itemIndex = sortednums.Count / 2;
