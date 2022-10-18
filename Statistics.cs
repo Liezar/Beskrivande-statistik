@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,22 +9,19 @@ namespace Beskrivande_statistik
 {
     public static class Statistics
     {
-        public static void Mode()
+        public static int[] Mode()
         {
-            var sortedList = new List<int>();
             var jsonNumbers = Inputs.ImportJSON();
-
-            foreach (var item in jsonNumbers.OrderBy(x => x))
-            {
-                sortedList.Add(item);   
-            }
+            List<int> KeyList = new List<int>();
             
-            var counts = sortedList.GroupBy(i => i).Select(grp => new { Key = grp.Key, Count = grp.Count() });
+            var counts = jsonNumbers.GroupBy(i => i).Select(grp => new { grp.Key, Count = grp.Count() });
+            var itemsMax = counts.Where(x => x.Count == counts.Max(y => y.Count));
 
-            foreach (var item in counts.OrderBy(x => x.Count))
+            foreach (var item in itemsMax)
             {
-                Console.WriteLine(item);
+                KeyList.Add(item.Key);
             }
+            return KeyList.ToArray();
         }
     }
 }
