@@ -13,16 +13,16 @@ namespace Beskrivande_statistik
         
         public static double GetStandardDeviation()
         {
-            //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
-            int[] nums = Inputs.ImportJSON();
-            //hittar medelvärde
+           //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
+           int[] nums = Inputs.ImportJSON();
+           //hittar medelvärde
            double deviation = nums.Average();
-            //formel för standardavikelse
-           double root = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
-           double sd = Math.Sqrt(root / nums.Length);
-            //avrundar till 1 decimal
-           sd = Math.Round(sd,1);
-           return sd;
+           //formel för standardavikelse, avrundar resultat till en decimal
+           double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
+           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1);
+            
+           
+           return standardDeviation;
         }
 
         public static int GetMedian()
