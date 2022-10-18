@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Runtime;
-using System.Xml.Serialization;
+﻿using System.Text;
 
 namespace Beskrivande_statistik
 {
@@ -23,6 +14,7 @@ namespace Beskrivande_statistik
             List<int> KeyList = new List<int>();
 
             //Kollar alla tal och räknar hur många gånger talen förekommer
+
             var counts = jsonNumbers.GroupBy(i => i).Select(grp => new { grp.Key, Count = grp.Count() });
 
             //Lägger till alla tal som förkommer flest gånger i itemsMax
@@ -70,7 +62,7 @@ namespace Beskrivande_statistik
                return sortednums[itemIndex];  
            }    
         }
-    
+
         public static int GetMaximum()
         {
             int[] inData = Inputs.ImportJSON();
@@ -88,7 +80,18 @@ namespace Beskrivande_statistik
             int range = GetMaximum() - GetMinimum();
             return range;
         }
-        public static dynamic DescriptiveStatistics()
+        public static double GetMean() // Metoden beräknar medelvärdet av datan från Json-filen.
+        {
+            int[] inData = Inputs.ImportJSON();
+            double sum = 0;
+            foreach (int x in inData)
+            {
+                sum += x;
+            }
+            double rounded = Math.Round(sum / inData.Length, 1);
+            return rounded;
+        }
+        public static dynamic DescriptiveStatistics() // Metoden anropar returvärdet från uträkningsmetoderna och skapar en Dictionary som returneras.
         {
             dynamic allData = new Dictionary<string, object>() { };
 
@@ -107,18 +110,6 @@ namespace Beskrivande_statistik
             allData.Add("Standardavvikelse", GetStandardDeviation());
 
             return allData;
-        }
-
-        public static double GetMean()
-        {
-            var inData = Inputs.ImportJSON();
-            double sum = 0;
-            foreach (int x in inData)
-            {
-                sum += x;
-            }
-            double rounded = Math.Round(sum / inData.Length,1);
-            return rounded;
         }
     }
 }
