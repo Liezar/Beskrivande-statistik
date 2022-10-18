@@ -36,8 +36,7 @@ namespace Beskrivande_statistik
            double deviation = nums.Average();
            //formel för standardavikelse, avrundar resultat till en decimal
            double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
-           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1);
-            
+           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
            
            return standardDeviation;
         }
@@ -53,28 +52,22 @@ namespace Beskrivande_statistik
             {
                 // jämt antal
                 return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
-                
             }
             else
             {
                 // ojämnt antal
-                return sortednums[itemIndex];
-                
-            }
-                
+                return sortednums[itemIndex];  
+            }    
         }
     
         public static int GetMaximum()
         {
-
             int[] inData = Inputs.ImportJSON();
             return inData.Max();
-
         }
 
         public static int GetMinimum()
         {
-
             int[] inData = Inputs.ImportJSON();
             return inData.Min();
         }
@@ -84,6 +77,37 @@ namespace Beskrivande_statistik
             int range = GetMaximum() - GetMinimum();
             return range;
         }
-    }
+        public static dynamic DescriptiveStatistics()
+        {
+            dynamic allData = new Dictionary<string, object>() { };
 
+            StringBuilder modeResault = new StringBuilder();
+            foreach (var item in Mode())
+            {
+                modeResault.Append($"{item}, ");
+            }
+
+            allData.Add("Maximum", GetMaximum());
+            allData.Add("Minimum", GetMinimum());
+            allData.Add("Medelvärde", GetMean());
+            allData.Add("Median", GetMedian());
+            allData.Add("Typvärde", modeResault);
+            allData.Add("Variationsbredd", GetRange());
+            allData.Add("Standardavvikelse", GetStandardDeviation());
+
+            return allData;
+        }
+
+        public static double GetMean()
+        {
+            var inData = Inputs.ImportJSON();
+            double sum = 0;
+            foreach (int x in inData)
+            {
+                sum += x;
+            }
+            double rounded = Math.Round(sum / inData.Length,1);
+            return rounded;
+        }
+    }
 }
