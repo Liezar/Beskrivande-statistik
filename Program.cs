@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Linq;
 namespace Beskrivande_statistik
 {
     internal class Program
@@ -11,6 +12,11 @@ namespace Beskrivande_statistik
             {
                 Console.Write($"{item} ");
             }
+
+            Console.WriteLine(Statistics.GetMaximum());
+            Console.WriteLine(Statistics.GetMinimum());
+            Console.WriteLine(Statistics.GetRange());
+
         }
     }
 }
