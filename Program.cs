@@ -5,6 +5,10 @@ namespace Beskrivande_statistik
     {
         static void Main(string[] args)
         {
+            double meanResault = Statistics.Mean(Inputs.ImportJSON());
+
+            
+            Console.WriteLine(Statistics.DescriptiveStatistics());
         }
     }
 }
