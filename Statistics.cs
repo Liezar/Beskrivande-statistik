@@ -37,8 +37,7 @@ namespace Beskrivande_statistik
             //Konverterar listan till en array och returnerar detta
             return KeyList.ToArray();
         }
-
-        }     
+ 
         //metod för beräkning av standardavikelse
         public static double GetStandardDeviation()
         {
