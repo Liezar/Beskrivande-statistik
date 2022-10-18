@@ -29,9 +29,18 @@ namespace Beskrivande_statistik
             //Konverterar listan till en array och returnerar detta
             return KeyList.ToArray();
         }
-
+ 
+        //metod för beräkning av standardavikelse
         public static double GetStandardDeviation()
         {
+           
+           int[] nums = Inputs.ImportJSON();
+           //formel för standardavikelse
+           double deviation = nums.Average();
+           double avarageDeviation = nums.Select(val => (val - deviation) * (val - deviation)).Sum();
+           double standardDeviation = Math.Round(Math.Sqrt(avarageDeviation / nums.Length),1); 
+           //returnar värdet på standardavikelsen
+           return standardDeviation;
             //https://learn.microsoft.com/en-us/dotnet/api/system.math.round?view=net-7.0
             int[] nums = Inputs.ImportJSON();
             //hittar medelvärde
@@ -42,24 +51,25 @@ namespace Beskrivande_statistik
 
             return standardDeviation;
         }
-
+        //metod för beräkning av medianvärde
         public static int GetMedian()
         {
-            //https://learn.microsoft.com/sv-se/dotnet/csharp/programming-guide/concepts/linq/how-to-add-custom-methods-for-linq-queries
-            int[] nums = Inputs.ImportJSON();
-            var sortednums = nums.OrderBy(number => number).ToList();
-            int itemIndex = sortednums.Count / 2;
-
-            if (sortednums.Count % 2 == 0)
-            {
-                // jämt antal
-                return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
-            }
-            else
-            {
-                // ojämnt antal
-                return sortednums[itemIndex];
-            }
+           //importerar Jsonfilen och konverterar till array 
+           int[] nums = Inputs.ImportJSON();
+           //Konverterar array till en lista och använder ToList för att sortera i storleksordning
+           var sortednums = nums.OrderBy(number => number).ToList();
+           //hittar talet i mitten på talserien:
+           int itemIndex = sortednums.Count / 2;
+           //om jämnt värde i mitten på talserien:
+           if (sortednums.Count % 2 == 0)
+           {
+               return (sortednums[itemIndex] + sortednums[itemIndex - 1]) / 2;
+           }
+           //om ojämnt värde i mitten på talsträngen
+           else
+           {
+               return sortednums[itemIndex];  
+           }    
         }
 
         public static int GetMaximum()
