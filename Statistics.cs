@@ -63,8 +63,9 @@ namespace Beskrivande_statistik
             }
                 
         }
-    }
-        public static int GetMaximum()
+    
+        public static int GetMaximum()  //Metod för att hämta maxvärdet i en
+                                        //array som innehåller datan från json-filen
         {
 
             int[] inData = Inputs.ImportJSON();
@@ -72,14 +73,16 @@ namespace Beskrivande_statistik
 
         }
 
-        public static int GetMinimum()
+        public static int GetMinimum()  //Metod för att hämta det minsta värdet i en
+                                        //array som innehåller datan från json-filen
         {
 
             int[] inData = Inputs.ImportJSON();
             return inData.Min();
         }
 
-        public static int GetRange()
+        public static int GetRange() //Beräknar variationsbredden mellan det högsta och det minsta talet i
+                                     //en array som innehåller data från json-filen
         {
             int range = GetMaximum() - GetMinimum();
             return range;
