@@ -4,7 +4,7 @@ namespace Beskrivande_statistik
 {
     public static class Inputs
     {
-        public static void CheckInputs(int[] source)  //En metod som kastar undantag om datakällan har nullvärde eller är tom
+        private static void CheckInputs(int[] source)  //En metod som kastar undantag om datakällan har nullvärde eller är tom
         {
             if (source == null)
             {
