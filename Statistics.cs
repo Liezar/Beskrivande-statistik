@@ -5,7 +5,7 @@ namespace Beskrivande_statistik
     public static class Statistics
     {
         //En metod för att ta de mest förekommande talen i json-filen och returnera det till en int[]
-        public static int[] Mode()
+        public static List<int> Mode()
         {
             //Hämtar datan från json-filen och lagrar i variablen
             var jsonNumbers = Inputs.ImportJSON();
@@ -27,7 +27,7 @@ namespace Beskrivande_statistik
             }
 
             //Konverterar listan till en array och returnerar detta
-            return KeyList.ToArray();
+            return KeyList;
         }
  
         //metod för beräkning av standardavikelse
