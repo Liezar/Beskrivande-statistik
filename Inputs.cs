@@ -8,7 +8,7 @@ namespace Beskrivande_statistik
         {
             if (source == null)
             {
-                throw new System.ArgumentNullException();
+                throw new ArgumentNullException();
             }
             if (source.Length == 0)
             {

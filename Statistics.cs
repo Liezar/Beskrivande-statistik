@@ -5,13 +5,13 @@ namespace Beskrivande_statistik
     public static class Statistics
     {
         //En metod för att ta de mest förekommande talen i json-filen och returnera det till en int[]
-        public static List<int> Mode()
+        private static List<int> Mode()
         {
             //Hämtar datan från json-filen och lagrar i variablen
             var jsonNumbers = Inputs.ImportJSON();
 
             //En list som lagrar typvärden
-            List<int> KeyList = new List<int>();
+            var KeyList = new List<int>();
 
             //Kollar alla tal och räknar hur många gånger talen förekommer
 
@@ -29,9 +29,9 @@ namespace Beskrivande_statistik
             //Konverterar listan till en array och returnerar detta
             return KeyList;
         }
- 
+
         //metod för beräkning av standardavikelse
-        public static double GetStandardDeviation()
+        private static double GetStandardDeviation()
         {
            
            int[] nums = Inputs.ImportJSON();
@@ -43,7 +43,7 @@ namespace Beskrivande_statistik
            return standardDeviation;
         }
         //metod för beräkning av medianvärde
-        public static int GetMedian()
+        private static int GetMedian()
         {
            //importerar Jsonfilen och konverterar till array 
            int[] nums = Inputs.ImportJSON();
@@ -63,27 +63,27 @@ namespace Beskrivande_statistik
            }    
         }
 
-        public static int GetMaximum()  //Metod för att hämta maxvärdet i en
+        private static int GetMaximum()  //Metod för att hämta maxvärdet i en
                                         //array som innehåller datan från json-filen
         {
             int[] inData = Inputs.ImportJSON();
             return inData.Max();
         }
 
-        public static int GetMinimum()  //Metod för att hämta det minsta värdet i en
+        private static int GetMinimum()  //Metod för att hämta det minsta värdet i en
                                         //array som innehåller datan från json-filen
         {
             int[] inData = Inputs.ImportJSON();
             return inData.Min();
         }
 
-        public static int GetRange() //Beräknar variationsbredden mellan det högsta och det minsta talet i
+        private static int GetRange() //Beräknar variationsbredden mellan det högsta och det minsta talet i
                                      //en array som innehåller data från json-filen
         {
             int range = GetMaximum() - GetMinimum();
             return range;
         }
-        public static double GetMean() // Metoden beräknar medelvärdet av datan från Json-filen.
+        private static double GetMean() // Metoden beräknar medelvärdet av datan från Json-filen.
         {
             int[] inData = Inputs.ImportJSON();
             double sum = 0;
